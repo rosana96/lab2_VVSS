@@ -35,11 +35,7 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>RELEASE</version>
-        </dependency>
+        
         <dependency>
             <groupId>org.apache.maven.surefire</groupId>
             <artifactId>surefire</artifactId>
@@ -47,4 +43,11 @@
             <type>pom</type>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>forplay-legacy</id>
+            <url>http://forplay.googlecode.com/svn/mavenrepo</url>
+        </repository>
+    </repositories>
 </project>
