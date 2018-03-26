@@ -6,27 +6,35 @@ import lab2_VVSS.model.Issue;
 import lab2_VVSS.repository.DataManager;
 
 public class ClientController {
-    public DataManager get_dataManager() {
-        return _dataManager;
-    }
-
     private DataManager _dataManager;
 
     public ClientController(DataManager _dataManager) {
         this._dataManager = _dataManager;
     }
 
+    public DataManager get_dataManager() {
+        return _dataManager;
+    }
+
     private String ValidateClient(String name, String address, String id) {
-        if (!name.equals("") && !address.equals("") && !name.equals(" ")) {
+        if (!name.equals("") && !name.equals(" ")) {
             for (int i = 0; i < name.length(); i++) {
-                if ((!Character.isUpperCase(name.charAt(i))) && (!Character.isLowerCase(name.charAt(i))) && (!Character.isSpaceChar(name.charAt(i)))) {
+                if (!(Character.isUpperCase(name.charAt(i)) || Character.isLowerCase(name.charAt(i)) || Character.isSpaceChar(name.charAt(i)))) {
                     return "Invalid character: " + name.charAt(i);
                 }
             }
-            return null;
+            if (name.length() > 256) {
+                return "Invalid name - too long!";
+            }
         } else {
-            return "Name or address cannot be empty!";
+            return "Name cannot be empty!";
         }
+
+        if (address.split(",").length != 3) {
+            return "Street name, number and/or city is missing!";
+        }
+        return null;
+
     }
 
     public String AddClient(String name, String address, String id) {

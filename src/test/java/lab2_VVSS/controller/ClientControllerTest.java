@@ -29,8 +29,7 @@ public class ClientControllerTest {
 
     @Test
     public void testAddInvalidClient() throws Exception {
-        String name = "AAA Balanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu Rosana" +
-                "Balanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu Rosana";
+        String name = "AAA Balanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu Rosana";
         String address = "my address";
         String id = "id1";
         Assert.assertNotEquals(null, clientController.AddClient(name, address, id));
