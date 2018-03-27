@@ -30,9 +30,13 @@ public class ClientController {
             return "Name cannot be empty!";
         }
 
-        if (address.split(",").length != 3) {
+        String[] addressTokens = address.split(",");
+        if (addressTokens.length != 3) {
             return "Street name, number and/or city is missing!";
         }
+        else
+            if (addressTokens[0].length()>5 || addressTokens[0].length() == 0)
+                return "Invalid number of street";
         return null;
 
     }

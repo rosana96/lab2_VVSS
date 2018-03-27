@@ -15,6 +15,11 @@ import static org.junit.Assert.*;
  */
 public class ClientControllerTest {
     private ClientController clientController;
+    private static String ID = "defaultID";
+    private static String ID2 = "defaultID2";
+    private static String ADDRESS = "12C, Str. Primaverii, Cluj-Napoca";
+    private static String NAME = "Balanescu Rosana";
+
 
     @Before
     public void setRepo() {
@@ -30,20 +35,119 @@ public class ClientControllerTest {
     @Test
     public void testAddInvalidClient() throws Exception {
         String name = "AAA Balanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu Rosana";
-        String address = "my address";
-        String id = "id1";
-        Assert.assertNotEquals(null, clientController.AddClient(name, address, id));
+        Assert.assertNotEquals(null, clientController.AddClient(name, ADDRESS, ID));
         Assert.assertEquals(0, clientController.get_dataManager().getClientsList().size());
     }
 
     @Test
     public void testAddValidClient() throws Exception {
         String name = "Balanescu Rosana";
-        String address = "my address";
-        String id = "id2";
-        Assert.assertEquals(null, clientController.AddClient(name, address, id));
+        Assert.assertEquals(null, clientController.AddClient(name, ADDRESS, ID));
         Assert.assertEquals(1, clientController.get_dataManager().getClientsList().size());
+    }
 
+    @Test
+    public void testCase3() {
+        String name = "Balanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu Rosana";
+        Assert.assertEquals(null, clientController.AddClient(name, ADDRESS, ID));
+        Assert.assertEquals(1, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase4() {
+        String name="";
+        Assert.assertNotEquals(null, clientController.AddClient(name, ADDRESS, ID));
+        Assert.assertEquals(0, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase5() {
+        String name1="R";
+        Assert.assertEquals(null, clientController.AddClient(name1, ADDRESS, ID));
+        Assert.assertEquals(1, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase6() {
+        String name255 = "alanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu Rosana";
+        Assert.assertEquals(null, clientController.AddClient(name255, ADDRESS, ID));
+        Assert.assertEquals(1, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase7() {
+        String name257 = "BBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu RosanaBalanescu Rosana";
+        Assert.assertNotEquals(null, clientController.AddClient(name257, ADDRESS, ID));
+        Assert.assertEquals(0, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase8() {
+        Assert.assertEquals(null, clientController.AddClient(NAME, ADDRESS, ID));
+        Assert.assertEquals(1, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase9() {
+        String address="";
+        Assert.assertNotEquals(null, clientController.AddClient(NAME, address, ID));
+        Assert.assertEquals(0, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase10() {
+        String address="12C, Str. Primaverii, Cluj,Napoca";
+        Assert.assertNotEquals(null, clientController.AddClient(NAME, address, ID));
+        Assert.assertEquals(0, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase11() {
+        String address="12C";
+        Assert.assertNotEquals(null, clientController.AddClient(NAME, address, ID));
+        Assert.assertEquals(0, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase12() {
+        String address="12C, Str. Primaverii";
+        Assert.assertNotEquals(null, clientController.AddClient(NAME, address, ID));
+        Assert.assertEquals(0, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase13() {
+        String address=", Str. Primaverii, Cluj-Napoca";
+        Assert.assertNotEquals(null, clientController.AddClient(NAME, address, ID));
+        Assert.assertEquals(0, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase14() {
+        String address="123, Str. Primaverii, Cluj-Napoca";
+        Assert.assertEquals(null, clientController.AddClient(NAME, address, ID));
+        Assert.assertEquals(1, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase15() {
+        String address="1234C, Str. Primaverii, Cluj-Napoca";
+        Assert.assertEquals(null, clientController.AddClient(NAME, address, ID));
+        Assert.assertEquals(1, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase16() {
+        String address="12345C, Str. Primaverii, Cluj-Napoca";
+        Assert.assertNotEquals(null, clientController.AddClient(NAME, address, ID));
+        Assert.assertEquals(0, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void testCase17() {
+        String address="1, Str. Primaverii, Cluj-Napoca";
+        Assert.assertEquals(null, clientController.AddClient(NAME, address, ID));
+        Assert.assertEquals(1, clientController.get_dataManager().getClientsList().size());
     }
 
 }
