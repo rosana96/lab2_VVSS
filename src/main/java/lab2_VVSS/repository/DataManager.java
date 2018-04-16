@@ -14,14 +14,6 @@ public class DataManager {
     private ArrayList<Client> Clients;
     private ArrayList<Issue> Issues;
 
-    public void setClients(ArrayList<Client> clients) {
-        Clients = clients;
-    }
-
-    public void setIssues(ArrayList<Issue> issues) {
-        Issues = issues;
-    }
-
     public DataManager() {
         Clients = new ArrayList<>();
         Issues = new ArrayList<>();
@@ -30,13 +22,21 @@ public class DataManager {
         LoadIssues();
     }
 
+    public void setClients(ArrayList<Client> clients) {
+        Clients = clients;
+    }
+
+    public void setIssues(ArrayList<Issue> issues) {
+        Issues = issues;
+    }
+
     private void LoadClient() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileClient));
             String line;
             while ((line = br.readLine()) != null) {
-                int i1 = line.indexOf(",");
-                String[] tokens = line.split(",");
+                int i1 = line.indexOf("|");
+                String[] tokens = line.split("|");
                 String name = tokens[0];
                 String address = tokens[1];
                 String id = tokens[2];
@@ -64,7 +64,7 @@ public class DataManager {
 
             while ((line = br.readLine()) != null) {
                 if (clientLine) {
-                    tokens = line.split(",");
+                    tokens = line.split("|");
                     name = tokens[0];
                     address = tokens[1];
                     id = tokens[2];

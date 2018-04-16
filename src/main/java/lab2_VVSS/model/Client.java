@@ -27,7 +27,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return String.format("%s,%s,%s", this.Name, this.Address, this.idClient);
+        return String.format("%s|%s|%s", this.Name, this.Address, this.idClient);
     }
 
     @Override

@@ -1,1 +1,1 @@
-Balanescu Rosana,12C, Str. Primaverii, Cluj-Napoca,defaultID
+Balanescu Rosana|12C,Str. Primaverii,Cluj-Napoca|defaultID
