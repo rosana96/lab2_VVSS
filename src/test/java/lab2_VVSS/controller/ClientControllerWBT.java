@@ -18,13 +18,13 @@ public class ClientControllerWBT {
     private static String ID2 = "defaultID2";
     private static String ADDRESS = "12C,Str. Primaverii,Cluj-Napoca";
     private static String NAME = "Balanescu Rosana";
-    private static Client c = new Client(NAME, ADDRESS, ID);
+    static Client c = new Client(NAME, ADDRESS, ID);
     private ClientController clientController;
-    private Issue i1 = new Issue(c, 2018, 1, 3, 0);
-    private Issue i2 = new Issue(c, 2018, 2, 3, 0);
-    private Issue i3 = new Issue(c, 2018, 3, 3, 0);
-    private Issue i4 = new Issue(c, 2018, 4, 3, 0);
-    private Issue i5 = new Issue(c, 2018, 5, 3, 0);
+    static Issue i1 = new Issue(c, 2018, 1, 3, 0);
+    static Issue i2 = new Issue(c, 2018, 2, 3, 0);
+    static Issue i3 = new Issue(c, 2018, 3, 3, 0);
+    static Issue i4 = new Issue(c, 2018, 4, 3, 0);
+    static Issue i5 = new Issue(c, 2018, 5, 3, 0);
     private DataManager dataManager = new DataManager();
 
 
@@ -125,5 +125,11 @@ public class ClientControllerWBT {
     public void testCase14() {
         // enters in for n times
         Assert.assertEquals("Monthly index already exists!", clientController.AddClientIndex(c, 2018, 5, 3));
+    }
+
+    //bbt for requirement c)
+    @Test
+    public void getIssuesBBT() throws Exception {
+        Assert.assertEquals(5, clientController.getIssues(c).size());
     }
 }

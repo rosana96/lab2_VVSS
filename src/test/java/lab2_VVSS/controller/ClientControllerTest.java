@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
  */
 public class ClientControllerTest {
     private ClientController clientController;
-    private static String ID = "defaultID";
+    static String ID = "defaultID";
     private static String ID2 = "defaultID2";
-    private static String ADDRESS = "12C, Str. Primaverii, Cluj-Napoca";
+    static String ADDRESS = "12C,Str. Primaverii,Cluj-Napoca";
     private static String NAME = "Balanescu Rosana";
 
 
@@ -41,8 +41,7 @@ public class ClientControllerTest {
 
     @Test
     public void testAddValidClient() throws Exception {
-        String name = "Balanescu Rosana";
-        Assert.assertEquals(null, clientController.AddClient(name, ADDRESS, ID));
+        Assert.assertEquals(null, clientController.AddClient(NAME, ADDRESS, ID));
         Assert.assertEquals(1, clientController.get_dataManager().getClientsList().size());
     }
 

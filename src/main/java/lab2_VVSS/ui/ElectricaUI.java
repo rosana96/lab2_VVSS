@@ -4,8 +4,10 @@ package lab2_VVSS.ui;
 
 import lab2_VVSS.controller.ClientController;
 import lab2_VVSS.model.Client;
+import lab2_VVSS.model.Issue;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -102,8 +104,25 @@ public class ElectricaUI {
                     String id = in.nextLine();
                     Client c = new Client(name, address, id);
 
-
-                    System.out.println(ctrl.ListIssue(c));
+                    try {
+                        StringBuilder s = new StringBuilder();
+                        String pen = "";
+                        List<Issue> issues = ctrl.getIssues(c);
+                        for (int i = 0; i < issues.size(); i++) {
+                            if (issues.get(i).getClient().equals(c)) {
+                                Issue issue = issues.get(i);
+                                pen = String.format("Year: %d, Month: %d, Paid: %2.0f, To pay: %2.0f\n", issue.getYear(), issue.getMonth(), issue.getPaid(), issue.getToPay());
+                                s.append(pen);
+                            }
+                        }
+                        if (s.toString().equals(""))
+                            System.out.println("Client has no invoices!");
+                        else
+                            System.out.println(s.toString());
+                    }
+                    catch(Exception e) {
+                        System.out.println(e.getMessage());
+                    }
 
                 }
 

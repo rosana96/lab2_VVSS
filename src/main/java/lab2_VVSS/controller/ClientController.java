@@ -5,6 +5,8 @@ import lab2_VVSS.model.Client;
 import lab2_VVSS.model.Issue;
 import lab2_VVSS.repository.DataManager;
 
+import java.util.List;
+
 public class ClientController {
     private DataManager _dataManager;
 
@@ -33,10 +35,8 @@ public class ClientController {
         String[] addressTokens = address.split(",");
         if (addressTokens.length != 3) {
             return "Street name, number and/or city is missing!";
-        }
-        else
-            if (addressTokens[0].length()>5 || addressTokens[0].length() == 0)
-                return "Invalid number of street";
+        } else if (addressTokens[0].length() > 5 || addressTokens[0].length() == 0)
+            return "Invalid number of street";
         return null;
 
     }
@@ -112,25 +112,13 @@ public class ClientController {
         return exist;
     }
 
-    public String ListIssue(Client c) {
-        StringBuilder s = new StringBuilder();
-        String pen = "";
-        Double total = 0.0;
-        Issue last = null, beforeLast;
+    public List<Issue> getIssues(Client c) throws Exception {
 
         if (!existsClient(c))
-            return "Client does not exist";
+            throw new Exception("Client does not exist");
 
-        for (int i = 0; i < _dataManager.getIssuesList().size(); i++) {
-            if (_dataManager.getIssuesList().get(i).getClient().equals(c)) {
-                Issue issue = _dataManager.getIssuesList().get(i);
-                pen = String.format("Year: %d, Month: %d, Paid: %2.0f, To pay: %2.0f\n", issue.getYear(), issue.getMonth(), issue.getPaid(), issue.getToPay());
-                s.append(pen);
-            }
-        }
-        if (s.toString().equals(""))
-            return "Client has no invoices!";
-        return s.toString();
+        return _dataManager.getIssuesList();
+
     }
 
 }
