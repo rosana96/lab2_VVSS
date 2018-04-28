@@ -18,9 +18,6 @@ public class ClientControllerIntegrationTest {
     private static String NAME = "Balanescu Rosana";
     private ClientController clientController;
     private DataManager dataManager = new DataManager();
-    private ClientControllerTest clientControllerTest = new ClientControllerTest();
-    private ClientControllerWBT clientControllerWBT = new ClientControllerWBT();
-
 
     @Before
     public void setRepo() {
@@ -33,6 +30,7 @@ public class ClientControllerIntegrationTest {
     }
 
 
+    //BIG BANG
     @Test
     public void integrationTest() throws Exception {
         //a
@@ -43,6 +41,32 @@ public class ClientControllerIntegrationTest {
         Assert.assertEquals(null, clientController.AddClientIndex(c, 2018, 8, 3));
 
         //c
+        Assert.assertEquals(2, clientController.getIssues(c).size());
+    }
+
+    //INCREMENTAL
+    @Test
+    public void incrementalTestA() {
+        Assert.assertEquals(null, clientController.AddClient(NAME, ADDRESS, ID));
+        Assert.assertEquals(1, clientController.get_dataManager().getClientsList().size());
+    }
+
+    @Test
+    public void incrementalTestAB() {
+        Assert.assertEquals(null, clientController.AddClient(NAME, ADDRESS, ID));
+        Assert.assertEquals(1, clientController.get_dataManager().getClientsList().size());
+
+        Assert.assertEquals(null, clientController.AddClientIndex(c, 2018, 8, 3));
+
+    }
+
+    @Test
+    public void incrementalTestABC() throws Exception {
+        Assert.assertEquals(null, clientController.AddClient(NAME, ADDRESS, ID));
+        Assert.assertEquals(1, clientController.get_dataManager().getClientsList().size());
+
+        Assert.assertEquals(null, clientController.AddClientIndex(c, 2018, 8, 3));
+
         Assert.assertEquals(2, clientController.getIssues(c).size());
     }
 }
